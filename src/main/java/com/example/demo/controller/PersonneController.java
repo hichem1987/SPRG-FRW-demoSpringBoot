@@ -6,12 +6,10 @@ import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PersonneController {
@@ -44,10 +42,24 @@ public class PersonneController {
     @PostMapping("personnes")
     public ResponseEntity addPersonne(@RequestBody Personne personne){
         if(personne.getNom() == null || personne.getNom().isBlank())
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prenom ne peut etre vide");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le nom ne peut etre vide");
         else {
             personneService.addPersonne(personne);
             return ResponseEntity.status(201).build();
         }
     }
+
+    @GetMapping("personnes/{id}")
+    public ResponseEntity findById(@PathVariable("id") Integer id ){
+        Optional<Personne> optional = personneService.findById(id);
+        if(optional.isEmpty())
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.ok(optional.get());
+    }
+
+    // Exemple de Query Param:
+    // personnes?page=2
+    // @RequestParam("page")
+
 }
