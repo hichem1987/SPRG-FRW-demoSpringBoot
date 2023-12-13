@@ -4,6 +4,8 @@ import com.example.demo.dao.Personne;
 import com.example.demo.metier.PersonneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -34,5 +36,10 @@ public class PersonneController {
     @GetMapping("personnes")
     public List<Personne> getPersonnes(){
         return personneService.getPersonnes();
+    }
+
+    @PostMapping("personnes")
+    public void addPersonne(@RequestBody Personne personne){
+        personneService.addPersonne(personne);
     }
 }
