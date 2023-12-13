@@ -55,7 +55,7 @@ public class PersonneController {
         if(optional.isEmpty())
             return ResponseEntity.notFound().build();
         else
-            return ResponseEntity.ok(optional.get());
+            return ResponseEntity.ok().body(optional.get());
     }
 
     // Exemple de Query Param:

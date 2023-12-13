@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Annuaire de personnes</title>
+</head>
+<body>
+
+<h1>Annuaire de personnes</h1>
+
+
+<p th:text="'Nombre de personnes:' + ${personnes.size()}"></p>
+
+<ul>
+    <li th:each="p:${personnes}" th:text="${p.prenom} + ' ' + ${p.nom}"></li>
+</ul>
+
+</body>
+</html>
